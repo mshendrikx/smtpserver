@@ -1,0 +1,51 @@
+myhostname = mail.example.com
+
+mydomain = example.com
+
+myorigin = $mydomain
+
+inet_interfaces = all
+
+inet_protocols = ipv4
+
+mydestination =
+
+relayhost =
+
+home_mailbox = Maildir/
+
+mynetworks = 127.0.0.0/8
+
+smtpd_banner = $myhostname ESMTP
+
+smtpd_tls_security_level = may
+
+smtp_tls_security_level = dane
+
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+
+smtpd_tls_cert_file = /etc/ssl/mail/fullchain.pem
+
+smtpd_tls_key_file = /etc/ssl/mail/privkey.pem
+
+smtpd_use_tls = yes
+
+smtpd_tls_auth_only = yes
+
+smtpd_sasl_auth_enable = yes
+
+smtpd_sasl_type = cyrus
+
+smtpd_sasl_path = smtpd
+
+smtpd_recipient_restrictions =
+    permit_sasl_authenticated,
+    reject_unauth_destination
+
+milter_default_action = accept
+
+milter_protocol = 6
+
+smtpd_milters = inet:opendkim:8891
+
+non_smtpd_milters = inet:opendkim:8891
